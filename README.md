@@ -5,19 +5,19 @@ Bootspy Keep track of unattended reboots (crashs)
 ### Debian based distributions
 - copy `bootspy.sysinit` to `/etc/init.d/bootspy`
 
-<code shell>
+<code>
 cp bootspy.sysinit /etc/init.d/bootspy
 </code>
 
 - make the script executable
 
-<code shell>
+<code>
 chmod +x /etc/init.d/bootspy
 </code>
 
 - copy `bootspy.default` to `/etc/default/bootspy`
 
-<code shell>
+<code>
 cp bootspy.default /etc/default/bootspy
 </code>
 
@@ -31,7 +31,10 @@ SUBJECT="bootspy report for $HOSTNAME"
 </pre>
 
 - Insert script into sysinit process
-`insserv bootspy`
+
+<code>
+insserv bootspy
+</code>
 
 ### Red Hat / CentOS based distributions
 TODO
