@@ -1,5 +1,7 @@
 # Bootspy
-Bootspy Keep track of unattended reboots (crashs)
+Bootspy Keep track of unattended reboots (crashs).
+
+When your system shutdown normally, a file is writed. During next boot, if the file is present, it means that the boot process is occuring after a normal shutdown. If the file isn't present, it means that the system didn't shutdown normally or has crashed. In this case, a mail is sent to a specific address at boot time.
 
 ## Install
 ### Debian based distributions
@@ -35,12 +37,6 @@ SUBJECT="bootspy report for $HOSTNAME"
 <code>
 insserv bootspy
 </code>
-
-### Red Hat / CentOS based distributions
-TODO
-
-## Usage
-When your system shutdown normally, a file is writed. At next boot, if the file is present, it means that the boot process is occuring after a normal shutdown. If the file isn't present, it means that the system didn't shutdown normally or has crashed.
 
 ## Test
 Violently powerOff your system !
