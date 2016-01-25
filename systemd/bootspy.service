@@ -1,0 +1,12 @@
+[Unit]
+Description=Check if boot was unattended
+After=network-online.target ntp.service
+
+[Service]
+EnvironmentFile=-/etc/default/bootspy
+Type=oneshot
+ExecStart=/usr/local/sbin/bootspy start
+ExecStop=/usr/local/sbin/bootspy stop
+
+[Install]
+WantedBy=multi-user.target
