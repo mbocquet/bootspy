@@ -21,6 +21,7 @@ NAME=bootspy
 #DAEMON_ARGS="--options args"
 #PIDFILE=/var/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
+SUBJECT="bootspy report for $HOSTNAME"
 DATE="$(date '+%Y-%m-%d %H:%M:%S')"
 
 # Exit if the package is not installed

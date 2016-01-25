@@ -1,4 +1,3 @@
 CONTROLFILE=/var/log/bootspy.ctl
 LOGFILE=/var/log/bootspy.log
 EMAIL="root"
-SUBJECT="bootspy report for $HOSTNAME"
