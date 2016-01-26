@@ -28,7 +28,7 @@ EMAIL="root"
 - Copy `systemd/bootspy` to `/usr/local/sbin`  
 `cp systemd/bootspy /usr/local/sbin/`
 - Make the script executable  
-`chmod +x /usr/local/sbin//bootspy`
+`chmod +x /usr/local/sbin/bootspy`
 - Copy `systemd/bootspy.service` to `/etc/systemd/system`  
 `cp systemd/bootspy.service /etc/systemd/system`
 - Copy `bootspy.default` to `/etc/default/bootspy`  
@@ -39,8 +39,8 @@ CONTROLFILE=/var/log/bootspy.ctl
 LOGFILE=/var/log/bootspy.log
 EMAIL="root"
 </pre>
-- Reload systemd daemon
-`systemct daemon-reload`
+- Reload systemd daemon  
+`systemctl daemon-reload`
 - Enable systemd unit  
 `systemctl enable bootspy.service`
 
