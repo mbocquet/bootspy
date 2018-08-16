@@ -1,3 +1,3 @@
-CONTROLFILE=/var/log/bootspy.ctl
+CONTROLFILE=/var/lib/bootspy/control
 LOGFILE=/var/log/bootspy.log
 EMAIL="root"
