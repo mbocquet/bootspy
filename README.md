@@ -1,4 +1,5 @@
 # Bootspy
+
 Bootspy Keep track of unattended reboots (crashs).
 
 When your system shutdown normally, a file is writed. During next boot, if the
@@ -8,7 +9,9 @@ normally or has crashed. In this case, a mail is sent to a specific address at
 boot time.
 
 ## Install
+
 ### Debian based distributions with sysinit
+
 - Copy `sysinit/bootspy.sysinit` to `/etc/init.d/bootspy`  
 `cp sysinit/bootspy.sysinit /etc/init.d/bootspy`
 - Make the script executable  
@@ -17,7 +20,7 @@ boot time.
 `cp bootspy.default /etc/default/bootspy`
 - Customize `/etc/default/bootspy`  
 <pre>
-CONTROLFILE=/var/log/bootspy.ctl
+CONTROLFILE=/var/lib/bootspy/control
 LOGFILE=/var/log/bootspy.log
 EMAIL="root"
 </pre>
@@ -25,6 +28,7 @@ EMAIL="root"
 `insserv bootspy`
 
 ### Debian based distributions with systemd
+
 - Copy `systemd/bootspy` to `/usr/local/sbin`  
 `cp systemd/bootspy /usr/local/sbin/`
 - Make the script executable  
@@ -35,7 +39,7 @@ EMAIL="root"
 `cp bootspy.default /etc/default/bootspy`
 - Customize `/etc/default/bootspy`  
 <pre>
-CONTROLFILE=/var/log/bootspy.ctl
+CONTROLFILE=/var/lib/bootspy/control
 LOGFILE=/var/log/bootspy.log
 EMAIL="root"
 </pre>
@@ -45,5 +49,30 @@ EMAIL="root"
 `systemctl enable bootspy.service`
 
 ## Tests
+
 - Reboot the system to test normal boot detection.
 - Unplug the power to test crash detection !
+
+## Uninstall
+
+### Debian based distributions with sysinit
+
+- Remove initscript from startup sequence
+`inssrv -r bootspy`
+- Remove `/etc/init.d/bootspy`  
+`rm /etc/init.d/bootspy`
+- Remove `/etc/default/bootspy`  
+`rm /etc/default/bootspy`
+
+### Debian based distributions with systemd
+
+- Remove executable from systemd startup sequence
+`systemctl disable bootspy.service`
+- Remove `/usr/local/sbin/bootspy`  
+`rm /usr/local/sbin/bootspy`
+- Remove `systemd/bootspy.service` to `/etc/systemd/system`  
+`rm /etc/systemd/system/bootspy.service`
+- Remove `/etc/default/bootspy`  
+`rm /etc/default/bootspy`
+- Reload systemd daemon  
+`systemctl daemon-reload`
