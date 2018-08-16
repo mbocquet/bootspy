@@ -58,7 +58,7 @@ EMAIL="root"
 ### Debian based distributions with sysinit
 
 - Remove initscript from startup sequence
-`inssrv -r bootspy`
+`insserv -r bootspy`
 - Remove `/etc/init.d/bootspy`  
 `rm /etc/init.d/bootspy`
 - Remove `/etc/default/bootspy`  
