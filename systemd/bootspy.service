@@ -6,6 +6,7 @@ After=network-online.target ntp.service
 EnvironmentFile=-/etc/default/bootspy
 Type=oneshot
 ExecStart=/usr/local/sbin/bootspy start
+RemainAfterExit=yes
 ExecStop=/usr/local/sbin/bootspy stop
 
 [Install]
