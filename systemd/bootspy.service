@@ -1,6 +1,6 @@
 [Unit]
 Description=Check if boot was unattended
-After=network-online.target ntp.service
+After=multi-user.target
 
 [Service]
 EnvironmentFile=-/etc/default/bootspy
