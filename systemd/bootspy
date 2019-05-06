@@ -2,7 +2,7 @@
 #
 # Keep track of unattended reboots (crashs)
 #
-# Copyright © 2014-2017 Mathias Bocquet (mbocquet@sekoya.org)
+# Copyright © 2014-2019 Mathias Bocquet (mbocquet@sekoya.org)
 
 NAME="$(basename $0)"
 SUBJECT="bootspy report for $HOSTNAME"
@@ -15,13 +15,13 @@ do_start()
 	then    # boot was attended !
 		echo "[$DATE] boot" >> $LOGFILE
 		# sending email info
-		echo "[$DATE] $NAME@$HOSTNAME detected a normal boot"|mail -s "$SUBJECT" $EMAIL
+		echo "[$DATE] $NAME@$HOSTNAME normal boot"|mail -s "$SUBJECT" $EMAIL
 		# removing control file
 		rm $CONTROLFILE
 	else    # boot was unattended !?
 		echo [$DATE] boot after crash ? >> $LOGFILE
 		# sending email alert
-		echo "[$DATE] $NAME@$HOSTNAME detected a crash"|mail -s "$SUBJECT" $EMAIL
+		echo "[$DATE] $NAME@$HOSTNAME crash boot"|mail -s "$SUBJECT" $EMAIL
 	fi
 }
 
