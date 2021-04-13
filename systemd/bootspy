@@ -10,36 +10,36 @@ DATE="$(date '+%Y-%m-%d %H:%M:%S')"
 
 do_start() {
     # check if control file generated at shutdown is there
-	if [ -f $CONTROLFILE ]
-	then    # boot was attended !
-		echo "[$DATE] boot" >> $LOGFILE
-		# sending email info
-		echo "[$DATE] $NAME@$HOSTNAME normal boot"|mail -s "$SUBJECT" $EMAIL
-		# removing control file
-		rm $CONTROLFILE
-	else    # boot was unattended !?
-		echo [$DATE] boot after crash ? >> $LOGFILE
-		# sending email alert
-		echo "[$DATE] $NAME@$HOSTNAME crash boot"|mail -s "$SUBJECT" $EMAIL
-	fi
+    if [ -f $CONTROLFILE ]
+    then    # boot was attended !
+        echo "[$DATE] boot" >> $LOGFILE
+        # sending email info
+        echo "[$DATE] $NAME@$HOSTNAME normal boot"|mail -s "$SUBJECT" $EMAIL
+        # removing control file
+        rm $CONTROLFILE
+    else    # boot was unattended !?
+        echo [$DATE] boot after crash ? >> $LOGFILE
+        # sending email alert
+        echo "[$DATE] $NAME@$HOSTNAME crash boot"|mail -s "$SUBJECT" $EMAIL
+    fi
 }
 
 do_stop() {
-	# writing the control file
-	touch $CONTROLFILE
-	echo [$DATE] shutdown >> $LOGFILE
-	return 0
+    # writing the control file
+    touch $CONTROLFILE
+    echo [$DATE] shutdown >> $LOGFILE
+    return 0
 }
 
 case "$1" in
-  start)
-	do_start
-	;;
-  stop)
-	do_stop
-	;;
-  *)
-	echo "Usage: $NAME {start|stop}" >&2
-	exit 1
-	;;
+    start)
+        do_start
+        ;;
+    stop)
+        do_stop
+        ;;
+    *)
+        echo "Usage: $NAME {start|stop}" >&2
+        exit 1
+        ;;
 esac
