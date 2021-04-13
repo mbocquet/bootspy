@@ -2,11 +2,15 @@
 
 Bootspy Keep track of unattended reboots (crashs).
 
-When your system shutdown normally, a file is writed. During next boot, if the
+When the system shuts normally, a file is writen. During the next boot, if the
 file is present, it means that the boot process is occuring after a normal
-shutdown. If the file isn't present, it means that the system didn't shutdown
-normally or has crashed. In this case, a mail is sent to a specific address at
-boot time.
+shutdown. If the file isn't there, it means the system didn't shutdown normally
+or has crashed. In this case, an alert is triggered by mail.
+
+## Dependencies
+
+Local MTA (postfix|exim) and mail command to be notified by mail. Otherwise,
+only logs to file.
 
 ## Install
 
