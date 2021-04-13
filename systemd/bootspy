@@ -8,9 +8,8 @@ NAME="$(basename $0)"
 SUBJECT="bootspy report for $HOSTNAME"
 DATE="$(date '+%Y-%m-%d %H:%M:%S')"
 
-do_start()
-{
-	# check if control file generated at shutdown is there
+do_start() {
+    # check if control file generated at shutdown is there
 	if [ -f $CONTROLFILE ]
 	then    # boot was attended !
 		echo "[$DATE] boot" >> $LOGFILE
@@ -25,8 +24,7 @@ do_start()
 	fi
 }
 
-do_stop()
-{
+do_stop() {
 	# writing the control file
 	touch $CONTROLFILE
 	echo [$DATE] shutdown >> $LOGFILE
