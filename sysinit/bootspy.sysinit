@@ -15,7 +15,7 @@
 
 # PATH should only include /usr/* if it runs after the mountnfs.sh script
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
-DESC="Checking if boot was human initiated"
+DESC="Check if boot was unattended"
 NAME=bootspy
 #DAEMON=/usr/sbin/$NAME
 #DAEMON_ARGS="--options args"
@@ -43,21 +43,21 @@ DATE="$(date '+%Y-%m-%d %H:%M:%S')"
 #
 do_start()
 {
-	# check if control file generated at shutdown is there
-	if [ -f $CONTROLFILE ]
-	then
-		# boot was attended !
-		echo "[$DATE] boot" >> $LOGFILE
-		# sending email info
-		echo "[$DATE] $NAME@$HOSTNAME detected a normal boot"|mail -s "$SUBJECT" $EMAIL
-		# removing control file
-		rm $CONTROLFILE
-	else
-		# boot after crash !?
-		echo [$DATE] boot after crash ? >> $LOGFILE
-		# sending email alert
-		echo "[$DATE] $NAME@$HOSTNAME detected a crash"|mail -s "$SUBJECT" $EMAIL
-	fi
+    # check if control file generated at shutdown is there
+    if [ -f $CONTROLFILE ]
+    then
+        # boot was attended !
+        echo "[$DATE] boot" >> $LOGFILE
+        # sending email info
+        echo "[$DATE] $NAME@$HOSTNAME detected a normal boot"|mail -s "$SUBJECT" $EMAIL
+        # removing control file
+        rm $CONTROLFILE
+    else
+        # boot after crash !?
+        echo [$DATE] boot after crash ? >> $LOGFILE
+        # sending email alert
+        echo "[$DATE] $NAME@$HOSTNAME detected a crash"|mail -s "$SUBJECT" $EMAIL
+    fi
 }
 
 #
@@ -65,33 +65,33 @@ do_start()
 #
 do_stop()
 {
-	# writing the control file
-	touch $CONTROLFILE
-	echo [$DATE] shutdown >> $LOGFILE
-	return 0
+    # writing the control file
+    touch $CONTROLFILE
+    echo [$DATE] shutdown >> $LOGFILE
+    return 0
 }
 
 case "$1" in
   start)
-	[ "$VERBOSE" != no ] && log_daemon_msg "Starting $DESC" "$NAME"
-	do_start
-	case "$?" in
-		0|1) [ "$VERBOSE" != no ] && log_end_msg 0 ;;
-		2) [ "$VERBOSE" != no ] && log_end_msg 1 ;;
-	esac
-	;;
+    [ "$VERBOSE" != no ] && log_daemon_msg "Starting $DESC" "$NAME"
+    do_start
+    case "$?" in
+        0|1) [ "$VERBOSE" != no ] && log_end_msg 0 ;;
+        2) [ "$VERBOSE" != no ] && log_end_msg 1 ;;
+    esac
+    ;;
   stop)
-	[ "$VERBOSE" != no ] && log_daemon_msg "Stopping $DESC" "$NAME"
-	do_stop
-	case "$?" in
-		0|1) [ "$VERBOSE" != no ] && log_end_msg 0 ;;
-		2) [ "$VERBOSE" != no ] && log_end_msg 1 ;;
-	esac
-	;;
+    [ "$VERBOSE" != no ] && log_daemon_msg "Stopping $DESC" "$NAME"
+    do_stop
+    case "$?" in
+        0|1) [ "$VERBOSE" != no ] && log_end_msg 0 ;;
+        2) [ "$VERBOSE" != no ] && log_end_msg 1 ;;
+    esac
+    ;;
   *)
-	echo "Usage: $SCRIPTNAME {start|stop}" >&2
-	exit 3
-	;;
+    echo "Usage: $SCRIPTNAME {start|stop}" >&2
+    exit 3
+    ;;
 esac
 
 :
