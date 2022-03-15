@@ -1,6 +1,6 @@
 [Unit]
 Description=Check if boot was unattended
-After=multi-user.target
+After=systemd-timesyncd.service
 
 [Service]
 EnvironmentFile=-/etc/default/bootspy
@@ -10,4 +10,4 @@ RemainAfterExit=yes
 ExecStop=/usr/local/sbin/bootspy stop
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target
