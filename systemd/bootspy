@@ -2,7 +2,7 @@
 #
 # Keep track of unattended reboots (crashs)
 #
-# Copyright © 2014-2022 Mathias Bocquet (mbocquet@sekoya.org)
+# Copyright © 2014-2023 Mathias Bocquet (mbocquet@sekoya.org)
 
 NAME="$(basename $0)"
 SUBJECT="bootspy report for $HOSTNAME"
