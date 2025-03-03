@@ -2,36 +2,55 @@
 #
 # Keep track of unattended reboots (crashs)
 #
-# Copyright © 2014-2023 Mathias Bocquet (mbocquet@sekoya.org)
+# Copyright © 2014-2025 Mathias Bocquet (mbocquet@sekoya.org)
 
-NAME="$(basename $0)"
-SUBJECT="bootspy report for $HOSTNAME"
-DATE="$(date '+%Y-%m-%d %H:%M:%S')"
+name="$(basename "${0}")"
+date="$(date '+%F %H:%M:%S')"
 
 do_start() {
     # check if control file generated at shutdown is there
-    if [ -f $CONTROLFILE ]
+    # shellcheck disable=SC2154
+    if [ -f "${controlfile}" ]
     then    # boot was attended !
-        echo "[$DATE] boot" >> $LOGFILE
-        # sending email info
-        echo "[$DATE] $NAME@$HOSTNAME normal boot"|mail -s "$SUBJECT" $EMAIL
-        # removing control file
-        rm $CONTROLFILE
-    else    # boot was unattended !?
-        echo [$DATE] boot after crash ? >> $LOGFILE
-        # sending email alert
-        echo "[$DATE] $NAME@$HOSTNAME crash boot"|mail -s "$SUBJECT" $EMAIL
+        message="boot"
+        ntfy_priority="${ntfy_normal_priority}"
+        ntfy_tags="${ntfy_normal_tags}"
+        # remove control file
+        rm "${controlfile}"
+    else    # boot was unattended !
+        message="crash boot"
+        ntfy_priority="${ntfy_crash_priority}"
+        ntfy_tags="${ntfy_crash_tags}"
+    fi
+    # shellcheck disable=SC2154
+    printf "[%s] %s\n" "${date}" "${message}" >> "${logfile}"
+    # send alert(s)
+    # shellcheck disable=SC2154
+    if [[ "${notifications}" =~ "email" ]]
+    then
+        printf "[%s] %s@%s %s" "${date}" "${name}" "${HOSTNAME}" "${message}"|mail -s "${name}@${HOSTNAME} ${message}" "${email}"
+    fi
+    # shellcheck disable=SC2154
+    if [[ "${notifications}" =~ "ntfy" ]]
+    then
+    curl \
+        -d "${message}" \
+        -H "Title: ${HOSTNAME}" \
+        -H "Priority: ${ntfy_priority}" \
+        -H "Tags: ${ntfy_tags}" \
+        -u :"${ntfy_token}" \
+        "${ntfy_url}"
     fi
 }
 
 do_stop() {
-    # writing the control file
-    touch $CONTROLFILE
-    echo [$DATE] shutdown >> $LOGFILE
+    # write the control file
+    touch "${controlfile}"
+    printf "[%s] shutdown\n" "${date}" >> "${logfile}"
     return 0
 }
 
-case "$1" in
+case "${1}" in
     start)
         do_start
         ;;
@@ -39,7 +58,7 @@ case "$1" in
         do_stop
         ;;
     *)
-        echo "Usage: $NAME {start|stop}" >&2
+        printf "Usage: %s {start|stop}\n" "${name}" >&2
         exit 1
         ;;
 esac

@@ -1,3 +1,17 @@
-CONTROLFILE=/var/lib/bootspy/control
-LOGFILE=/var/log/bootspy.log
-EMAIL="root"
+controlfile="/var/lib/bootspy/control"
+logfile="/var/log/bootspy.log"
+# Notifications type(s). Choose between none (logs only), email, ntfy or both.
+# notifications="email,ntfy"
+notifications="email"
+
+# email notifications needs only the email address or alias.
+email="root"
+
+# Ntfy needs more informations
+# ntfy_token="tk_#############################"
+# ntfy_url="https://ntfy.sh/mytopic"
+# ntfy_url="https://ntfy.example.org/mytopic"
+# ntfy_normal_priority="default"
+# ntfy_normal_tags="arrows_counterclockwise"
+# ntfy_crash_priority="high"
+# ntfy_crash_tags="arrows_counterclockwise,boom"
