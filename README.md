@@ -12,7 +12,7 @@ or has crashed. In this case, an alert can be triggered.
 Local MTA (`postfix`|`exim`|`nullmailer`) and mail command (`bsd-mailx`) to be
 notified by mail.
 
-Ntfy.sh data to be notified by Ntfy.
+Ntfy.sh data and `curl` to be notified by Ntfy.
 
 Otherwise only logs to file.
 
