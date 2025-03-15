@@ -9,8 +9,12 @@ or has crashed. In this case, an alert can be triggered.
 
 # Dependencies
 
-Local MTA (`postfix`|`exim`|`nullmailer`) and mail command (`bsd-mailx`) to be notified by mail.
-Ntfy.sh data to be notified by Ntfy. Otherwise only logs to file.
+Local MTA (`postfix`|`exim`|`nullmailer`) and mail command (`bsd-mailx`) to be
+notified by mail.
+
+Ntfy.sh data to be notified by Ntfy.
+
+Otherwise only logs to file.
 
 # Install
 
@@ -30,7 +34,7 @@ cp systemd/bootspy.service /etc/systemd/system
 ```
 Copy `bootspy.default` to `/etc/default/bootspy`
 ```sh
-cp bootspy.default /etc/default/bootspy`
+cp bootspy.default /etc/default/bootspy
 ```
 
 ## On Sysinit based distributions
@@ -43,7 +47,7 @@ cp sysinit/bootspy.sysinit /etc/init.d/bootspy
 ```
 Make the script executable
 ```sh
-chmod +x /etc/init.d/bootspy`
+chmod +x /etc/init.d/bootspy
 ```
 Copy `bootspy.default` to `/etc/default/bootspy`
 ```sh
@@ -99,7 +103,9 @@ Unplug the power or reset the system to test crash detection !
 
 Or use these commands as root to simulate a crash :
 ```sh
-systemctl stop bootspy.service; rm /var/lib/bootspy/control; systemctl start bootspy.service
+systemctl stop bootspy.service
+rm /var/lib/bootspy/control
+systemctl start bootspy.service
 ```
 
 Events are logged in `/var/log/bootspy.log`.
