@@ -38,6 +38,7 @@ do_start() {
         -H "Title: ${HOSTNAME}" \
         -H "Priority: ${ntfy_priority}" \
         -H "Tags: ${ntfy_tags}" \
+        -s \
         -u :"${ntfy_token}" \
         "${ntfy_url}"
     fi
