@@ -1,6 +1,6 @@
 [Unit]
 Description=Check if boot was unattended
-After=systemd-timesyncd.service
+After=default.target
 
 [Service]
 EnvironmentFile=-/etc/default/bootspy
