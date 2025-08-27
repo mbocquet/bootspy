@@ -1,10 +1,10 @@
 [Unit]
 Description=Check if boot was unattended
-After=default.target
+After=network-online.target time-set.target
 
 [Service]
 EnvironmentFile=-/etc/default/bootspy
-Type=oneshot
+Type=simple
 ExecStart=/usr/local/sbin/bootspy start
 RemainAfterExit=yes
 ExecStop=/usr/local/sbin/bootspy stop
